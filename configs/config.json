@@ -1,0 +1,10 @@
+{
+  "url": {
+    "nabu": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange"
+  },
+  "valcode":
+    {
+      "euro": "EUR",
+      "usd": "USD"
+    }
+}
