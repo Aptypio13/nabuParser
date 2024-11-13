@@ -1,4 +1,3 @@
-import json
 from quickchart import *
 from nabu.model.Currency import Currency
 
