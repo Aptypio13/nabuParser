@@ -1,6 +1,8 @@
 from typing import Union
 
 from pydantic import BaseModel
+
+from nabu.model.Currency import Currency
 from nabu.nabu_main import getCurrentCurse
 from fastapi import FastAPI
 
@@ -18,16 +20,17 @@ def get_currency_to_currency(valcode: str, valcodeTo: str, amount: float):
     print(f"Calculating {amount} {valcode} to {valcodeTo}")
     currencyCourseFrom = getCurrentCurse(valcode)
     currencyCourseTo = getCurrentCurse(valcodeTo)
-    return {f"from={currencyCourseFrom}; To={currencyCourseTo}"}
+    result = (amount * currencyCourseFrom.rate) / currencyCourseTo.rate
+    return {f"on {currencyCourseTo.date} {amount} {valcode} to {valcodeTo} = {result}"}
 
-@app.put("/currencyy/{valcode}")
-def get_currency(valcode: str, q: Union[str, None] = None):
+@app.get("/currencyy/{valcode}")
+def get_currency(valcode: str):
     amount = 150
     print(f"Calculating {amount} currency for {valcode}")
-    currentCourse = getCurrentCurse("euro")
+    currentCourse: Currency = getCurrentCurse("euro")
     result = amount / currentCourse.rate
     print({f"{amount}грн в {valcode}" : result})
-    return {"result": result, "q": q}
+    return {"result": result}
 
 
 @app.get("/hello/")

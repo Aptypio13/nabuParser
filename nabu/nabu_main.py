@@ -56,7 +56,7 @@ def printCurrentCurse(currency: str) -> None :
 
 
 def getCurrentCurse(currency: str) -> Currency :
-    with open('/configs/config.json', 'r') as json_file:
+    with open('configs/config.json', 'r') as json_file:
         config_data = json.load(json_file)
 
     naby_url: str = config_data["url"]["nabu"]
@@ -67,7 +67,7 @@ def getCurrentCurse(currency: str) -> Currency :
     if response.status_code == 200:
         body = response.json()
         currency = jsonToCurrency(body)
-        return Currency.__str__(currency[0])
+        return currency[0]
     else:
         print("Error:", response.status_code)
 
