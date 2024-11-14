@@ -19,7 +19,6 @@ def getValcode(data: json, currency: str) -> str:
 
 #printing course for range
 def printRangeCurse(currency: str, dateFrom: datetime.date, dateTo: datetime.date) -> None :
- # https://bank.gov.ua/NBU_Exchange/exchange_site?start=20220115&end=20220131&valcode=usd&sort=exchangedate&order=desc
     with open('configs/config.json', 'r') as json_file:
         config_data = json.load(json_file)
 
@@ -54,7 +53,7 @@ def printCurrentCurse(currency: str) -> None :
     else:
         print("Error:", response.status_code)
 
-
+#get current curse for currency by name
 def getCurrentCurse(currency: str) -> Currency :
     with open('configs/config.json', 'r') as json_file:
         config_data = json.load(json_file)
@@ -71,5 +70,3 @@ def getCurrentCurse(currency: str) -> Currency :
     else:
         print("Error:", response.status_code)
 
-
-# d = printRangeCurse("euro", "2023.01.01", "2023.01.04")
