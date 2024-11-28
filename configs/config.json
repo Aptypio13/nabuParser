@@ -2,11 +2,13 @@
   "url": {
     "nabu": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange",
     "range": "https://bank.gov.ua/NBU_Exchange/exchange_site",
-    "chart": "https://quickchart.io/chart"
+    "chart": "https://quickchart.io/chart",
+    "binance": "https://api.binance.com"
   },
   "valcode":
     {
       "euro": "EUR",
+      "eur": "EUR",
       "usd": "USD"
     }
 

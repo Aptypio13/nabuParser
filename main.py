@@ -1,10 +1,12 @@
+from datetime import datetime
 from typing import Union
 
 from pydantic import BaseModel
 
 from nabu.model.Currency import Currency
-from nabu.nabu_main import getCurrentCurse
+from nabu.nabu_main import getCurrentCurse, printRangeCurse
 from fastapi import FastAPI
+import dateutil.parser as parser
 
 app = FastAPI()
 
@@ -15,22 +17,33 @@ class Item(BaseModel):
     is_offer: Union[bool, None] = None
 
 
-@app.put("/currency/{valcode}&{valcodeTo}/{amount}")
+@app.get("/currency/{valcode}&{valcodeTo}/{amount}")
 def get_currency_to_currency(valcode: str, valcodeTo: str, amount: float):
     print(f"Calculating {amount} {valcode} to {valcodeTo}")
     currencyCourseFrom = getCurrentCurse(valcode)
     currencyCourseTo = getCurrentCurse(valcodeTo)
+    print(
+        f"from = {currencyCourseFrom}"
+        f"to = {currencyCourseTo}"
+    )
     result = (amount * currencyCourseFrom.rate) / currencyCourseTo.rate
-    return {f"on {currencyCourseTo.date} {amount} {valcode} to {valcodeTo} = {result}"}
+    return {f"On {currencyCourseTo.date} {amount} {valcode} to {valcodeTo} = {result}"}
 
-@app.get("/currencyy/{valcode}")
+
+@app.get("/currency/{valcode}")
 def get_currency(valcode: str):
-    amount = 150
-    print(f"Calculating {amount} currency for {valcode}")
-    currentCourse: Currency = getCurrentCurse("euro")
-    result = amount / currentCourse.rate
-    print({f"{amount}грн в {valcode}" : result})
-    return {"result": result}
+    currentCourse: Currency = getCurrentCurse(valcode)
+    return {f"Current curse {valcode} to UAH": currentCourse.rate}
+
+
+@app.get("/currency/range/{valcode}/{dateFrom}&{dateTo}")
+def get_currency_range(valcode: str, dateFrom: str, dateTo: str):
+    dateFrom = parser.parse(dateFrom)
+    dateTo = parser.parse(dateTo)
+    print(f"from = {dateFrom} \n to = {dateTo}")
+    printRangeCurse(valcode, dateFrom.date(), dateTo.date())
+    return {"Range printed"}
+
 
 
 @app.get("/hello/")

@@ -5,15 +5,19 @@ from nabu.model import Currency
 
 def jsonToCurrency(body: json) -> list[Currency] :
     result: list[Currency] = []
-    for item in body:
-        id = item["r030"]
-        name = item["txt"]
-        rate = item["rate"]
-        cc = item["cc"]
-        date = item["exchangedate"]
-        result.append(Currency.Currency(id, cc, name, rate, date))
-    return result
+    try:
+        for item in body:
+            id = item["r030"]
+            name = item["txt"]
+            rate = item["rate"]
+            cc = item["cc"]
+            date = item["exchangedate"]
+            result.append(Currency.Currency(id, cc, name, rate, date))
+        return result
+    except:
+        print(f"Error: {body}")
+        return list[Currency]()
 
 
 def parseDate(date: datetime.date) -> str :
-    return str(date).replace(".", "")
+    return str(date).replace(".", "").replace("-", "").replace("/", "")
