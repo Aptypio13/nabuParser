@@ -11,9 +11,3 @@ class Currency :
 
     def __str__(self):
         return f"Курс {self.name} на {self.date} = {self.rate}грн"
-
-
-    def decode_currency(data):
-        if "date" in data:
-            data["date"] = datetime.datetime.strptime(data["date"], "%Y-%m-%d").date()
-            return Currency(**data)
