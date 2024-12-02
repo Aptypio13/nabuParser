@@ -18,6 +18,15 @@ def jsonToCurrency(body: json) -> list[Currency] :
         print(f"Error: {body}")
         return list[Currency]()
 
+def isoToCode(iso_code: int) -> str:
+    with open('configs/config.json', 'r') as json_file:
+        config_data = json.load(json_file)
+    codes: dict[str] = config_data["iso-4217"]
+    try:
+       return codes.get(str(iso_code))
+    except:
+        print("ISO-Code invalid")
+        return "None"
 
 def parseDate(date: datetime.date) -> str :
     return str(date).replace(".", "").replace("-", "").replace("/", "")
