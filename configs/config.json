@@ -3,7 +3,8 @@
     "nabu": "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange",
     "range": "https://bank.gov.ua/NBU_Exchange/exchange_site",
     "chart": "https://quickchart.io/chart",
-    "binance": "https://api.binance.com"
+    "binance": "https://api.binance.com",
+    "monobank": "https://api.monobank.ua/bank/currency"
   },
   "valcode":
     {
@@ -12,4 +13,18 @@
       "usd": "USD"
     }
 
+      "usd": "USD",
+      "dolllars": "USD",
+      "uah": "UAH"
+    },
+  "iso-4217":
+  {
+    "980": "UAH",
+    "840": "USD",
+    "978": "EUR",
+    "826": "GBP",
+    "392": "JPY",
+    "756": "CHF",
+    "156": "CNY"
+  }
 }
