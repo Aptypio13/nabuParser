@@ -2,7 +2,6 @@ import datetime
 import sys
 
 import matplotlib
-from matplotlib import font_manager
 
 from nabu.model.Currency import Currency
 
